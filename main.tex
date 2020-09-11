@@ -1,0 +1,91 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{float}
+\captionsetup[table]{font={stretch=1.5}}     %% change 1.5 as you like
+\captionsetup[figure]{font=onehalfspacing}    %% change onehalfspacing as you like
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{braket}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[top=1.0in,left=1.0in,right=1.0in,bottom=1.0in]{geometry}
+\usepackage[
+backend=biber,
+style=numeric,
+citestyle=ieee,
+subentry,
+mcite=true,
+]{biblatex} %biblatex, more modern form of bibtex 
+\usepackage{multicol,caption}
+\usepackage{makeidx}
+\usepackage{pdfpages}
+\usepackage[compat=1.0.0]{tikz-feynman}
+\usepackage{hyperref}
+%\usepackage{LuaLaTeX}
+\makeindex
+%\usepackage{fixltx2e}
+%\usepackage{cite} %if you want to use bibtex
+\newenvironment{Figure}
+  {\par\medskip\noindent\minipage{\linewidth}}
+  {\endminipage\par\medskip}
+\setlength{\columnsep}{1cm}
+\setlength{\parindent}{0pt}
+\usepackage{color,soul}
+\usepackage{booktabs}
+\newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
+\defbibentryset{griffiths2008book}{griffiths2008introduction, griffiths2008neutrino1.5, griffiths2008neutrinoOscillations} %if you want to use biblatex with multiple referances, useful for books
+\addbibresource{refs.bib} %if you want to use bib latex, add sources
+\setlength\bibitemsep{2.0\itemsep} % if you want to use bib latex and increase item seperation
+
+\title{Rough Thesis}
+\date{\today}
+\author{Ronald Collins ID:200948843}
+
+\begin{document}
+\maketitle
+
+\begin{Figure}
+ \centering
+ \includegraphics[width=1.0\linewidth]{Liverpool_logo}
+ \captionof*{figure}{} 
+\end{Figure}
+
+
+\begin{center}
+\textit{Department of Physics, High Energy Physics\\}
+\textit{VIDARR collaboration\\}
+\end{center}
+
+
+\pagenumbering{gobble}
+\newpage
+\pagenumbering{roman}
+\begin{abstract}
+\normalsize A basic overview\\
+
+\providecommand{\keywords}[1]{\textbf{\textit{Keywords:}} #1} %Keywords command has to be supplied manually
+\keywords{Monte Carlo, Geant4, High performance computing (HPC), Anti-neutrino}
+\end{abstract}
+\vspace{5mm} %5mm vertical space before main body of text
+%\begin{multicols}{2}
+\tableofcontents
+\newpage
+
+\pagenumbering{arabic}
+
+\section{}
+\cite{lederman1970resource}
+
+%\bibliography{refs} 
+%\bibliographystyle{ieeetr}
+\printbibliography
+
+
+\end{document}
