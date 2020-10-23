@@ -152,7 +152,7 @@ The dark noise has two distinct components, the peaks and the background surroun
 \label{fig_fitting_of_non_peak_dark_noise}
 \end{figure}
 
-The results from \ref{fig_fitting_of_non_peak_dark_noise} can then be used to construct a cumulative distribution seen in figure \ref{fig_cumulative_prob_dark}, this cumulative distribution is what is used by the simulation in order to reconstruct the dark noise distribution. During the simulation a random dice is thrown that probability is then converted back into a dark noise value which is then assigned to a random bar in the detector. Values past 13.7\,mV use the exponential fit.
+The results from \ref{fig_fitting_of_non_peak_dark_noise} can then be used to construct a cumulative distribution seen in figure \ref{fig_cumulative_prob_dark}, this cumulative distribution is what is used by the simulation in order to visnstruct the dark noise distribution. During the simulation a random dice is thrown that probability is then converted back into a dark noise value which is then assigned to a random bar in the detector. Values past 13.7\,mV use the exponential fit.
 \begin{figure}[H]
  \centering
  \includegraphics[width=0.8\linewidth]{cumulative_prob_dark_noise.png}
@@ -172,12 +172,12 @@ In order to measure light for a given amount of scintillating material we need t
 \label{equ_Birks_formula}
 \end{equation}
 \\\\In this model molecules in the ionisation column are labelled ``damaged'' and ``undamaged'' for convenience where ``damaged'' molecules are those which dissipate ionisation energy nonradiatively (quenching) and so lower scintillation efficiency\cite{craun_1970} \cite{knoll_2010}. ``Damaged'' molecules occupy highly ionised or excited states, they de-excite quickly ($<$ 1 ns) to the ``undamaged'' condition \cite{craun_1970}. Some permanent damage will occur and does contribute to long term degradation of the scintillator but is not relevant for quenching\cite{craun_1970}. From this B is the ratio of ``damaged''/``undamaged'' molecules and k is the relative probability of quenching. kB is treated as a single adjustable parameter as there is no way to measure k or B separately \cite{craun_1970} \cite{knoll_2010}. Where kB is scintillator dependant only and will be refereed to as a single entity as Birk's constant. The response for electrons above $\sim$ 125\,keV is linear \cite{craun_1970}. This is also seen in Birk's law which also becomes linear for fast electrons \cite{knoll_2010}. This is important for modelling electrons. 
-\subsection{MINERvA Birk's Constant}\label{subSec_geant4Simulation_MINERvA_Birks_Constant}
+\subsection{MINERvA Birk's Constant}\label{subSec_geant4Simulation_MINERvABirksConstant}
 In equation \ref{equ_Birks_formula} the parameters $kB$ and $S$ are empirically determined. $S$ is a normalisation parameter that is particle dependent and kB is the birks constant for the scintillator and is particle independent. The MINERvA collaboration \cite{aliaga_2015} also uses the same scintillator as the VIDARR detector \cite{aliaga_2014}, the collaboration determined the value of the of kB to be 0.0905 $\pm$ 0.015\,mm/MeV at best fit. This Birks parameter was obtained by using GEANT4 MC data, which is the same approach by which VIDARR has obtained its birks parameter.
 Both the VIDARR and MINERvA approach use the Geant4 bertini cascade model when attempting to measure the \\\\Birks parameter $kB$ \cite{Heikkinen_2003}. In addition both use the QGSP physics list which applies the quark gluon string model when simulating particles \cite{Patrick_2018}. The steps have to remain course in Geant4 otherwise the $kB$ parameter changes  \cite{aliaga_2015}. This is why the EMY physics lists were not used, even though they simulate smaller steps and so would potentially simulate stopping better. Then energy range for the MINERvA signal is of order $\sim$ 1\,GeV, whereas the energy range for VIDARR's signal is 0-10\,MeV. However a major source of noise for VIDARR are cosmic muons which have energies $\sim$ 1\,GeV and protons with energies between 0-10\,MeV as a result of fast neutrons. Using the minerva data requires going to higher energies (lower $dE/dx$) in order to ensure similar results in the $dL/dx$ fit.  
 \\\\The results of the MINERvA Birks law investigation concluded that a birks constant of 0.0905 $\pm$ 0.015\,mm/MeV was the most accurate value for the scintillator \cite{aliaga_2015}. Whilst the MINERvA experiment measures protons with an energy range of 0\,MeV-500\,MeV and the particles of VIDARR's interest are $\overline{\nu_{e}}$s with energy range between 0\,MeV-10\,MeV the Birk's constant is the same regardless. This is because the Birk's law is a representation of the scintillator itself and therefore is not particle or energy dependent, the amount of saturation in the scintillator that the Birks constant represents is constant in all cases. 
 
-\subsection{Loss of Deposited Energy due to Quenching}\label{subSec_geant4Simulation_quenching_loss}
+\subsection{Loss of Deposited Energy due to Quenching}\label{subSec_geant4Simulation_quenchingLoss}
 \hl{Very Important!: This work is currently not replicable, the collection of scripts is on my hepstore somewhere and needs to be backed up and put onto git as soon as possible!}
 \\\\The effect of quenching varies greatly depending on the particle it is a function of both energy and mass. By considering three example particles and their corresponding anti-particles the scale of quenching can be observed. The first particle to consider would be electrons as they are one of the most common sources of noise and have a large charge to mass ratio when compared to other particles that could be potential background for this experiment. The level of quenching for electrons and positrons is very minimal which can be seen in figure \ref{fig_electron_positron_quenched_and_not}. This was simulated using a ``slab'' of material, figure \ref{fig_electrons_viewed_in_slab}, instead of using a bar or a full detector this was done to ensure that all of the energy was kept inside the plastic scintillator so that the full energy loss due to quenching could be measured. 
 
@@ -263,7 +263,7 @@ The effect of quenching on protons is much more significant than for electrons, 
 \label{fig_alpha_Aalpha_quenched_and_not}
 \end{figure}
 
-\subsection{Monte Carlo Modelling of Birks Law}\label{subSec_geant4Simulation_monte_carlo_birks_law}
+\subsection{Monte Carlo Modelling of Birks Law}\label{subSec_geant4Simulation_MonteCarloBirksLaw}
 \hl{Very Important!: This work is currently not replicable, the collection of scripts is on my hepstore somewhere and needs to be backed up and put onto git as soon as possible!}
 \\\\The photon model in Geant4 is computationally expensive as the simulation toolkit simulates optical photon tracks at every energy deposition for a given amount of energy. With a scintillation yield of $10^5$\,ph/MeV as in this simulation the slowdown observed at higher energies is extreme. This slowdown can be somewhat alleviated by counting the number of photons and then killing the optical photon tracks, as it is the number of photons produced that determines quenching, but even this is still computationally expensive. So whilst the count and kill method was used for determining Birk's law, once the light was characterised the count and kill method was abandoned due to its high computational load.
 \\\\In order to accurately quantify the response of Birks law Monte Carlo modelling was used in Geant4. This was done so that the value of $S$ in equation \ref{equ_Birks_formula} could be found for each particle. The Geant4 physics list of QGSP\_\_BERT\_\_HP allows for good repdouction of Birk's law \cite{Patrick_2018},\cite{aliaga_2015}. However, two new models of the scintillator were required in order to accurately quantify the effects of the Birk's constant, both of them required the removal of all wavelength shifting fibres and MPPCs and so are just scintillator. The first model was a ``slice model'' that was 1\,mm thick and had a cross section of 0.2\,m by 0.2\,m, this allowed for the approximations $dL/dx \approx \Delta L / \Delta x$ and $dE/dx \approx \Delta E / \Delta x$ to be used. The second model was a ``slab'' model (figure \ref{fig_electrons_viewed_in_slab}) that was 2\,m thick and had a cross section of 0.2\,m by 0.2\,m, this model was used for determining how effective the Birk's approximation was. Both models had particle energy ranges of 0\,MeV-100\,MeV.
@@ -344,10 +344,71 @@ L = 10340E - 0.1000
 E = \frac{L +0.1000}{10340} 
 \label{equ_MeV_electron_equivalent_light}
 \end{equation}
-\subsection{Simulated Results With Physical and Electronic Effects}\label{subSec_geant4Simulation_results_physical_electronics}
+
+\subsection{Counting Statistics}
+
+\begin{figure}[H]
+ \centering
+ \includegraphics[width=0.8\linewidth]{countingStats10.png}
+ \captionof{figure}{blah} %~can be used as a kind of place holder in latex
+ \label{fig_CoutingStats10}
+\end{figure}
+
+\subsection{Simulated Results With Physical and Electronic Effects}\label{subSec_geant4Simulation_resultsPhysicalElectronics}
+The impact of physical and electronic effects on simulated data is quite significant especially for heavier particles such as protons and $\alpha$s. The heaviest particle we expect to see in statistically significant quantities is the $alpha$ in order to show the maximum difference between generated and more realistic simulation generated $alpha$ particles are used for this subsection. 
+\\\\If these effects are left out of the simulation then the results look nonphysical in figure \ref{fig_alpha_summed_vs_truth} the summed energy inside the detector is equal to the truth energy in most cases. The only events which do not have all the energy summed in the detector are those which were generated near the edges of the bar, these events are absorbed by the TiO$_2$ coating and so deposit less energy in the detector. The modelling of quenching (see subsection \ref{subSec_geant4Simulation_MonteCarloBirksLaw}) and attenuation (see figure \ref{fig_attenuationPlot}) therefore cause a large decrease in the summed energy inside the detector seen in figures \ref{subFig_alphavisVsTruth} and \ref{subFig_alphavisVsTruthZoomed}. This version of the data can be seen as what an idealistic version of the VIDARR detector could produce. The detector response is longer linear due to he effects described by Birk's Law. 
+\begin{figure}[H]
+ \centering
+ \includegraphics[width=0.8\linewidth]{truth_vs_summed_alpha.png}
+ \captionof{figure}{blah} %~can be used as a kind of place holder in latex
+ \label{fig_alpha_summed_vs_truth}
+\end{figure}
+\begin{figure}[H]
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{truth_vs_visSummed_alpha.png}
+  \captionsetup{width=.9\linewidth}
+  \caption{blah}
+  \label{subFig_alphavisVsTruth}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{truth_vs_visSummed_alpha_zoom.png}
+  \captionsetup{width=.9\linewidth}
+  \caption{blah}
+  \label{subFig_alphavisVsTruthZoomed}
+\end{subfigure}
+\caption{blah}
+\label{fig_alphavisVsTruthAndZoomed}
+\end{figure}
+
+Finally the effects caused by the electronics and the counting statistics \hl{need counting statistics figure!!!} gives the simulated distribution a more realistic shape. The results for this can be seen in figures \ref{subFig_alphaRecoVsTruth} and \ref{subFig_alphaRecoVsTruthZoomed}. With the data driven effects taken into account the simulation should give a more realistic result. Unfortunately due to the outbreak of Covid-19 the detector construction was delayed and so the accuracy of this simulation can only be benched marked against the individual components rather than the detector as a whole. 
+\begin{figure}[H]
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{truth_vs_recoSummed_alpha.png}
+  \captionsetup{width=.9\linewidth}
+  \caption{blah}
+  \label{subFig_alphaRecoVsTruth}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{truth_vs_recoSummed_alpha_zoom.png}
+  \captionsetup{width=.9\linewidth}
+  \caption{blah}
+  \label{subFig_alphaRecoVsTruthZoomed}
+\end{subfigure}
+\caption{blah}
+\label{fig_alphaRecoVsTruthAndZoomed}
+\end{figure}
+
+
 \section{Cosmic Tomography}\label{sec_cosmicTomography}
-\subsection{Simulation}\label{subSec_cosmicTomography_simulation}
-\subsection{Methodology}\label{subSec_cosmicTomography_methodology}
+\subsection{Simulation}\label{subSec_cosmicTomography_Simulation}
+\subsection{Methodology}\label{subSec_cosmicTomography_Methodology}
+\subsection{Reactor Shadow}\label{subSec_cosmicTomography_ReactorShadow}
 
 %\bibliography{refs} 
 %\bibliographystyle{ieeetr}
